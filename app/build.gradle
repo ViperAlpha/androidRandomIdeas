@@ -39,4 +39,9 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"
     debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$leakCanary"
+
+    implementation "com.google.dagger:dagger:$dagger2"
+    kapt "com.google.dagger:dagger-compiler:$dagger2"
+    implementation "com.google.dagger:dagger-android-support:$dagger2"
+    kapt "com.google.dagger:dagger-android-processor:$dagger2"
 }
