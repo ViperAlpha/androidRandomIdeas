@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':api-client', ':data', ':domain'
 rootProject.name='Random Ideas'
