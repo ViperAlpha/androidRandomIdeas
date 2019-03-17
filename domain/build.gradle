@@ -3,7 +3,5 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlin"
 }
-
-sourceCompatibility = "8"
-targetCompatibility = "8"
