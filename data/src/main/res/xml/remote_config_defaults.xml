@@ -3,11 +3,11 @@
 <defaultsMap>
     <entry>
         <key>welcome_message</key>
-        <value>Bien Venido…</value>
+        <value>Default Welcome</value>
     </entry>
     <entry>
-        <key>welcome_message_caps</key>
-        <value>false</value>
+        <key>welcome_image</key>
+        <value>https://www.askideas.com/media/13/Hello-Welcome-Picture.png</value>
     </entry>
 </defaultsMap>
 <!-- END xml_defaults -->

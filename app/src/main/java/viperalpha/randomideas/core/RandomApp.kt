@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.app.Service
 import androidx.fragment.app.Fragment
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -35,6 +36,7 @@ class RandomApp : Application(), HasActivityInjector, HasSupportFragmentInjector
         }
         LeakCanary.install(this)
 
+        Fresco.initialize(this)
     }
 
 

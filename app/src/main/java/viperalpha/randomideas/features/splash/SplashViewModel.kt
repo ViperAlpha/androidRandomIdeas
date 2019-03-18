@@ -17,14 +17,24 @@ class SplashViewModel @Inject constructor(
 
     init {
         loadWelcomeMessage()
+        loadWelcomeImage()
     }
 
     private fun loadWelcomeMessage() {
         disposables.add(
-            configUseCase(RemoteConfig.RemoteKey.WelcomeMessage.key)
+            configUseCase(RemoteConfig.RemoteKey.WelcomeMessage.key, true)
                 .subscribe(
-                    { value -> uiModel.welcomeMessage.set(value.data?.value) },
+                    { responseWelcomeMessage -> uiModel.welcomeMessage.set(responseWelcomeMessage.data?.value) },
                     { t -> uiModel.welcomeMessage.set("Welcome message. ;)") })
+        )
+    }
+
+    private fun loadWelcomeImage() {
+        disposables.add(
+            configUseCase(RemoteConfig.RemoteKey.WelcomeImage.key, true)
+                .subscribe(
+                    { responseWelcomeImage -> uiModel.welcomeImageUrl.set(responseWelcomeImage.data?.value) },
+                    { t -> uiModel.welcomeImageUrl.set("") })
         )
     }
 }

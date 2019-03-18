@@ -10,8 +10,8 @@ import viperalpha.domain.firebase.model.RemoteConfig
  */
 interface FirebaseConfigRepositoryContract {
 
-    fun getRemoteStringForKey(keyRemoteString: String, force: Boolean = false): Single<RemoteConfig<String>>
-    fun getRemoteBooleanForKey(keyRemoteBoolean: String, force: Boolean = false): Single<RemoteConfig<Boolean>>
-    fun getRemoteLongForKey(keyRemoteLong: String, force: Boolean = false): Single<RemoteConfig<Long>>
-    fun getRemoteDoubleForKey(keyRemoteDouble: String, force: Boolean = false): Single<RemoteConfig<Double>>
+    fun getRemoteStringForKey(keyForString: String, force: Boolean = false): Single<RemoteConfig<String>>
+    fun getRemoteBooleanForKey(keyForBoolean: String, force: Boolean = false): Single<RemoteConfig<Boolean>>
+    fun getRemoteLongForKey(keyForLong: String, force: Boolean = false): Single<RemoteConfig<Long>>
+    fun getRemoteDoubleForKey(keyForDouble: String, force: Boolean = false): Single<RemoteConfig<Double>>
 }

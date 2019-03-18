@@ -12,6 +12,7 @@ buildscript {
         rxJava = '2.2.7'
         rxKotlin = '2.3.0'
         rxAndroid = '2.1.1'
+        lifecycle = '2.1.0-alpha03'
 
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'

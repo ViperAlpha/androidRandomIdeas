@@ -12,4 +12,5 @@ import javax.inject.Inject
 class SplashUiModel @Inject constructor(
 ) {
     var welcomeMessage: ObservableField<String> = ObservableField("")
+    var welcomeImageUrl: ObservableField<String> = ObservableField("")
 }

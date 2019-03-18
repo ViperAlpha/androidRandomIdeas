@@ -6,12 +6,13 @@ package viperalpha.domain.firebase.model
  * @email rms_master@hotmail.com
  */
 data class RemoteConfig<valueType>(
-    val key: String,
-    var value: valueType
+        val key: String,
+        var value: valueType
 ) {
     enum class RemoteKey(
-        val key: String
+            val key: String
     ) {
-        WelcomeMessage("welcome_message");
+        WelcomeMessage("welcome_message"),
+        WelcomeImage("welcome_image")
     }
 }
