@@ -9,6 +9,9 @@ buildscript {
         room = '2.0.0'
         firebaseRemoteConfig = '16.4.0'
         firebaseCore = '16.0.8'
+        rxJava = '2.2.7'
+        rxKotlin = '2.3.0'
+        rxAndroid = '2.1.1'
 
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'

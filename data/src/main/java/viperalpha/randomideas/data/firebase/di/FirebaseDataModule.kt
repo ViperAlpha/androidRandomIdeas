@@ -5,8 +5,10 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 
 import dagger.Module
 import dagger.Provides
+import viperalpha.domain.firebase.contracts.FirebaseConfigRepositoryContract
 import viperalpha.randomideas.BuildConfig
 import viperalpha.randomideas.R
+import viperalpha.randomideas.data.firebase.FirebaseRepository
 import javax.inject.Singleton
 
 /**
@@ -15,11 +17,11 @@ import javax.inject.Singleton
  * @email rms_master@hotmail.com
  */
 @Module
-class FirebaseModule {
+class FirebaseDataModule {
 
     @Provides
     @Singleton
-    internal fun provideRemoteConfig() : FirebaseRemoteConfig {
+    internal fun provideRemoteConfig(): FirebaseRemoteConfig {
         val remoteConfig = FirebaseRemoteConfig.getInstance()
 
         val configSettings = FirebaseRemoteConfigSettings.Builder()
@@ -31,4 +33,8 @@ class FirebaseModule {
 
         return remoteConfig
     }
+
+    @Provides
+    internal fun provideFirebaseConfigRepo(remoteConfig: FirebaseRemoteConfig): FirebaseConfigRepositoryContract =
+        FirebaseRepository(remoteConfig)
 }

@@ -1,4 +1,4 @@
-package viperalpha.randomideas
+package viperalpha.randomideas.core.ui
 
 import androidx.appcompat.app.AppCompatActivity
 
