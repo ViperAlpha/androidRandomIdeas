@@ -1,6 +1,7 @@
 package viperalpha.randomideas.data.firebase
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import io.reactivex.Completable
 import io.reactivex.Single
 import viperalpha.domain.firebase.contracts.FirebaseConfigRepositoryContract
 import viperalpha.domain.firebase.model.RemoteConfig
@@ -21,31 +22,30 @@ class FirebaseRepository @Inject constructor(
     }
 
     override fun getRemoteStringForKey(key: String, force: Boolean): Single<RemoteConfig<String>> {
-        return firebaseRemoteConfig.fetch(if (force) 0L else FETCH_TIME)
-            .listen()
-            .doOnComplete { firebaseRemoteConfig.activateFetched() }
+        return fetch(force)
             .andThen(Single.just(RemoteConfig(key, firebaseRemoteConfig.getString(key))))
     }
 
     override fun getRemoteBooleanForKey(key: String, force: Boolean): Single<RemoteConfig<Boolean>> {
-        return firebaseRemoteConfig.fetch(if (force) 0L else FETCH_TIME)
-            .listen()
-            .doOnComplete { firebaseRemoteConfig.activateFetched() }
+        return fetch(force)
             .andThen(Single.just(RemoteConfig(key, firebaseRemoteConfig.getBoolean(key))))
     }
 
 
     override fun getRemoteLongForKey(key: String, force: Boolean): Single<RemoteConfig<Long>> {
-        return firebaseRemoteConfig.fetch(if (force) 0L else FETCH_TIME)
-            .listen()
-            .doOnComplete { firebaseRemoteConfig.activateFetched() }
+        return fetch(force)
             .andThen(Single.just(RemoteConfig(key, firebaseRemoteConfig.getLong(key))))
     }
 
     override fun getRemoteDoubleForKey(key: String, force: Boolean): Single<RemoteConfig<Double>> {
-        return firebaseRemoteConfig.fetch(FETCH_TIME)
-            .listen()
+        return fetch(force)
             .andThen(Single.just(RemoteConfig(key, firebaseRemoteConfig.getDouble(key))))
+    }
+
+    fun fetch(force: Boolean): Completable {
+        return firebaseRemoteConfig.fetch(if (force) 0L else FETCH_TIME)
+            .listen()
+            .doOnComplete { firebaseRemoteConfig.activateFetched() }
     }
 
 
