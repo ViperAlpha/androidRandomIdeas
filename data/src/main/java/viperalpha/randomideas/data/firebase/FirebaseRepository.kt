@@ -18,34 +18,35 @@ class FirebaseRepository @Inject constructor(
 ) : FirebaseConfigRepositoryContract {
 
     companion object {
-        val FETCH_TIME: Long = 4 * 60 * 1000 // 4 horas
+        val FETCH_TIME = 4L * 60 * 60 // 4 horas
     }
 
-    override fun getRemoteStringForKey(keyRemoteString: String, force: Boolean): Single<RemoteConfig<String>> {
+    override fun getRemoteStringForKey(keyForString: String, force: Boolean): Single<RemoteConfig<String>> {
         return fetchConfig(force)
-            .andThen(Single.just(RemoteConfig(keyRemoteString, firebaseRemoteConfig.getString(keyRemoteString))))
+            .andThen(Single.just(RemoteConfig(keyForString, firebaseRemoteConfig.getString(keyForString))))
     }
 
-    override fun getRemoteBooleanForKey(keyRemoteBoolean: String, force: Boolean): Single<RemoteConfig<Boolean>> {
+    override fun getRemoteBooleanForKey(keyForBoolean: String, force: Boolean): Single<RemoteConfig<Boolean>> {
         return fetchConfig(force)
-            .andThen(Single.just(RemoteConfig(keyRemoteBoolean, firebaseRemoteConfig.getBoolean(keyRemoteBoolean))))
+            .andThen(Single.just(RemoteConfig(keyForBoolean, firebaseRemoteConfig.getBoolean(keyForBoolean))))
     }
 
 
-    override fun getRemoteLongForKey(keyRemoteLong: String, force: Boolean): Single<RemoteConfig<Long>> {
+    override fun getRemoteLongForKey(keyForLong: String, force: Boolean): Single<RemoteConfig<Long>> {
         return fetchConfig(force)
-            .andThen(Single.just(RemoteConfig(keyRemoteLong, firebaseRemoteConfig.getLong(keyRemoteLong))))
+            .andThen(Single.just(RemoteConfig(keyForLong, firebaseRemoteConfig.getLong(keyForLong))))
     }
 
-    override fun getRemoteDoubleForKey(keyRemoteDouble: String, force: Boolean): Single<RemoteConfig<Double>> {
+    override fun getRemoteDoubleForKey(keyForDouble: String, force: Boolean): Single<RemoteConfig<Double>> {
         return fetchConfig(force)
-            .andThen(Single.just(RemoteConfig(keyRemoteDouble, firebaseRemoteConfig.getDouble(keyRemoteDouble))))
+            .andThen(Single.just(RemoteConfig(keyForDouble, firebaseRemoteConfig.getDouble(keyForDouble))))
     }
 
     fun fetchConfig(force: Boolean): Completable {
         return firebaseRemoteConfig.fetch(if (force) 0L else FETCH_TIME)
             .listen()
             .doOnComplete { firebaseRemoteConfig.activateFetched() }
+            .onErrorComplete()
     }
 
 
