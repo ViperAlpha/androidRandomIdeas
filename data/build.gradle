@@ -1,9 +1,43 @@
-apply plugin: 'java-library'
-apply plugin: 'kotlin'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Integer.parseInt("$rootProject.compileSdkVersion")
+
+    compileOptions {
+        sourceCompatibility "$rootProject.sourceCompatibility"
+        targetCompatibility "$rootProject.targetCompatibility"
+    }
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt("$rootProject.minSdkVersion")
+        targetSdkVersion Integer.parseInt("$rootProject.targetSdkVersion")
+    }
+
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+            all {
+                jvmArgs '-noverify'
+            }
+        }
+    }
+
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlin"
+
     implementation project(":api-client")
     implementation project(":domain")
+
+    implementation "com.google.dagger:dagger:$dagger2"
+    kapt "com.google.dagger:dagger-compiler:$dagger2"
+
+    implementation "com.google.firebase:firebase-core:$firebaseCore"
+    implementation "com.google.firebase:firebase-config:$firebaseRemoteConfig"
 }

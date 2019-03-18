@@ -18,56 +18,39 @@ import viperalpha.randomideas.core.RandomApp
  * @author Reinaldo Moreira da Silva
  * @email rms_master@hotmail.com
  */
-class AppInjector {
-    companion object {
+object AppInjector {
+    fun init(app: RandomApp) {
+        DaggerRandomAppComponent.builder()
+            .application(app)
+            .build()
+            .inject(app)
 
-        fun init(app: RandomApp) {
-            DaggerRandomAppComponent.builder()
-                .application(app)
-                .build()
-                .inject(app)
+        app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) = handleActivity(activity)
+            override fun onActivityPaused(activity: Activity?) = Unit
+            override fun onActivityResumed(activity: Activity?) = Unit
+            override fun onActivityStarted(activity: Activity?) = Unit
+            override fun onActivityDestroyed(activity: Activity?) = Unit
+            override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) = Unit
+            override fun onActivityStopped(activity: Activity?) = Unit
 
-            app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-                override fun onActivityPaused(activity: Activity?) {
-                }
+        })
+    }
 
-                override fun onActivityResumed(activity: Activity?) {
-                }
-
-                override fun onActivityStarted(activity: Activity?) {
-                }
-
-                override fun onActivityDestroyed(activity: Activity?) {
-                }
-
-                override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
-                }
-
-                override fun onActivityStopped(activity: Activity?) {
-                }
-
-                override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
-                    handleActivity(activity)
-                }
-            })
+    private fun handleActivity(activity: Activity?) {
+        if (activity is HasSupportFragmentInjector || activity is Injectable) {
+            AndroidInjection.inject(activity)
         }
 
-        private fun handleActivity(activity: Activity?) {
-            if (activity is HasSupportFragmentInjector || activity is Injectable) {
-                AndroidInjection.inject(activity)
-            }
-
-            if (activity is FragmentActivity) {
-                activity.supportFragmentManager.registerFragmentLifecycleCallbacks(object :
-                    FragmentManager.FragmentLifecycleCallbacks() {
-                    override fun onFragmentCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
-                        if (f is Injectable) {
-                            AndroidSupportInjection.inject(f)
-                        }
+        if (activity is FragmentActivity) {
+            activity.supportFragmentManager.registerFragmentLifecycleCallbacks(object :
+                FragmentManager.FragmentLifecycleCallbacks() {
+                override fun onFragmentCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
+                    if (f is Injectable) {
+                        AndroidSupportInjection.inject(f)
                     }
-                }, true)
-            }
+                }
+            }, true)
         }
-
     }
 }

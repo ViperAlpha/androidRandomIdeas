@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "764731591626",
+    "firebase_url": "https://randomapp-fef7c.firebaseio.com",
+    "project_id": "randomapp-fef7c",
+    "storage_bucket": "randomapp-fef7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764731591626:android:51d278259a0cb516",
+        "android_client_info": {
+          "package_name": "viperalpha.randomideas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "764731591626-g1k9aen9b0hf9he82v8oetlepsttrp90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCshZQBwA4Fbx0f27VsvPWv5xcypm7bRtE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

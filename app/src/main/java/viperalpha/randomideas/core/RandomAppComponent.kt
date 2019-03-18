@@ -4,6 +4,8 @@ import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
+import viperalpha.randomideas.data.firebase.di.FirebaseModule
+import viperalpha.randomideas.features.splash.SplashModule
 import javax.inject.Singleton
 
 /**
@@ -11,12 +13,12 @@ import javax.inject.Singleton
  * @author Reinaldo Moreira da Silva
  * @email rms_master@hotmail.com
  */
-@Component(modules = [AndroidSupportInjectionModule::class])
+@Component(modules = [AndroidSupportInjectionModule::class, RandomAppModule::class, SplashModule::class, FirebaseModule::class])
 @Singleton
 interface RandomAppComponent {
 
     fun getApp(): Application
-    fun inject(app: Application)
+    fun inject(app: RandomApp)
 
     @Component.Builder
     interface Builder {

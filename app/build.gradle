@@ -23,6 +23,10 @@ android {
     dataBinding {
         enabled = true
     }
+    compileOptions {
+        sourceCompatibility = "$rootProject.sourceCompatibility"
+        targetCompatibility = "$rootProject.targetCompatibility"
+    }
 }
 
 dependencies {
@@ -32,7 +36,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlin"
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha03'
     implementation 'androidx.core:core-ktx:1.1.0-alpha05'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     testImplementation 'junit:junit:4.13-beta-2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1-alpha02'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha02'
@@ -47,7 +51,8 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger2"
     kapt "com.google.dagger:dagger-android-processor:$dagger2"
 
-    implementation 'com.google.firebase:firebase-config:16.4.0'
+    implementation "com.google.firebase:firebase-core:$firebaseCore"
+    implementation "com.google.firebase:firebase-config:$firebaseRemoteConfig"
 
     implementation "androidx.arch.core:core-common:2.0.0"
 //    implementation "androidx.arch.core:core:2.0.0-rc01"
@@ -55,7 +60,7 @@ dependencies {
     implementation "androidx.arch.core:core-runtime:2.0.1-alpha01"
     implementation "androidx.lifecycle:lifecycle-common:2.1.0-alpha03"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.1.0-alpha03"
-    implementation "androidx.lifecycle:lifecycle-compiler:2.1.0-alpha03"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.1.0-alpha03"
     implementation "androidx.lifecycle:lifecycle-extensions:2.1.0-alpha03"
     implementation "androidx.lifecycle:lifecycle-livedata:2.1.0-alpha03"
     implementation "androidx.lifecycle:lifecycle-livedata-core:2.1.0-alpha03"
@@ -68,12 +73,9 @@ dependencies {
     implementation "androidx.room:room-common:$room"
     implementation "androidx.room:room-runtime:$room"
     kapt "androidx.room:room-compiler:$room"
-    implementation "androidx.room:room-guava:$room"
     implementation "androidx.room:room-migration:$room"
     implementation "androidx.room:room-rxjava2:$room"
     testImplementation "androidx.room:room-testing:2.1.0-alpha05"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
-    implementation 'androidx.constraintlayout:constraintlayout-solver:2.0.0-alpha3'
     testImplementation 'androidx.test.espresso.idling:idling-concurrent:3.2.0-alpha02'
     testImplementation 'androidx.test.espresso.idling:idling-net:3.2.0-alpha02'
     testImplementation 'androidx.test.espresso:espresso-accessibility:3.2.0-alpha02'
@@ -92,32 +94,11 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha03'
     implementation "androidx.asynclayoutinflater:asynclayoutinflater:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
-    implementation 'androidx.collection:collection:1.1.0-alpha03'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0-alpha01'
-    implementation "androidx.cursoradapter:cursoradapter:1.0.0"
-    implementation "androidx.browser:browser:1.0.0"
-    implementation "androidx.customview:customview:1.0.0"
     implementation "com.google.android.material:material:1.1.0-alpha04"
-    implementation "androidx.documentfile:documentfile:1.0.1"
-    implementation "androidx.drawerlayout:drawerlayout:1.0.0"
     implementation 'androidx.exifinterface:exifinterface:1.1.0-alpha01'
-    implementation "androidx.gridlayout:gridlayout:1.0.0"
-    implementation "androidx.heifwriter:heifwriter:1.0.0"
-    implementation "androidx.interpolator:interpolator:1.0.0"
-    implementation 'androidx.leanback:leanback:1.1.0-alpha01'
-    implementation 'androidx.loader:loader:1.1.0-beta01'
-    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0-alpha01'
-    implementation "androidx.media2:media2:1.0.0-alpha04"
-    implementation "androidx.media2:media2-exoplayer:1.0.0-alpha01"
-    implementation 'androidx.mediarouter:mediarouter:1.1.0-alpha02'
     implementation "androidx.multidex:multidex:2.0.1"
-    implementation "androidx.multidex:multidex-instrumentation:2.0.0"
-    implementation "androidx.palette:palette:1.0.0"
-    implementation "androidx.percentlayout:percentlayout:1.0.0"
-    implementation 'androidx.leanback:leanback-preference:1.1.0-alpha01'
-    implementation "androidx.legacy:legacy-preference-v14:1.0.0"
     implementation 'androidx.preference:preference:1.1.0-alpha04'
-    implementation "androidx.print:print:1.0.0"
     implementation "androidx.recommendation:recommendation:1.0.0"
     implementation 'androidx.recyclerview:recyclerview-selection:1.1.0-alpha01'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha03'
@@ -127,23 +108,17 @@ dependencies {
     implementation "androidx.slidingpanelayout:slidingpanelayout:1.0.0"
     implementation 'androidx.annotation:annotation:1.1.0-alpha02'
     implementation 'androidx.core:core:1.1.0-alpha05'
-    implementation "androidx.contentpager:contentpager:1.0.0"
     implementation "androidx.legacy:legacy-support-core-ui:1.0.0"
     implementation "androidx.legacy:legacy-support-core-utils:1.0.0"
     implementation "androidx.dynamicanimation:dynamicanimation:1.0.0"
-    implementation "androidx.emoji:emoji:1.0.0"
-    implementation "androidx.emoji:emoji-appcompat:1.0.0"
-    implementation "androidx.emoji:emoji-bundled:1.0.0"
     implementation 'androidx.fragment:fragment:1.1.0-alpha05'
-    implementation 'androidx.media:media:1.1.0-alpha02'
-    implementation "androidx.tvprovider:tvprovider:1.0.0"
     implementation "androidx.legacy:legacy-support-v13:1.0.0"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0-alpha01'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha01'
     implementation 'androidx.transition:transition:1.1.0-alpha02'
-    implementation 'androidx.versionedparcelable:versionedparcelable:1.1.0-alpha02'
     implementation "androidx.viewpager:viewpager:1.0.0"
-    implementation "androidx.wear:wear:1.0.0"
     implementation "androidx.webkit:webkit:1.0.0"
 }
+
+apply plugin: 'com.google.gms.google-services'
