@@ -21,25 +21,25 @@ class FirebaseRepository @Inject constructor(
         val FETCH_TIME: Long = 4 * 60 * 1000 // 4 horas
     }
 
-    override fun getRemoteStringForKey(key: String, force: Boolean): Single<RemoteConfig<String>> {
+    override fun getRemoteStringForKey(keyRemoteString: String, force: Boolean): Single<RemoteConfig<String>> {
         return fetch(force)
-            .andThen(Single.just(RemoteConfig(key, firebaseRemoteConfig.getString(key))))
+            .andThen(Single.just(RemoteConfig(keyRemoteString, firebaseRemoteConfig.getString(keyRemoteString))))
     }
 
-    override fun getRemoteBooleanForKey(key: String, force: Boolean): Single<RemoteConfig<Boolean>> {
+    override fun getRemoteBooleanForKey(keyRemoteBoolean: String, force: Boolean): Single<RemoteConfig<Boolean>> {
         return fetch(force)
-            .andThen(Single.just(RemoteConfig(key, firebaseRemoteConfig.getBoolean(key))))
+            .andThen(Single.just(RemoteConfig(keyRemoteBoolean, firebaseRemoteConfig.getBoolean(keyRemoteBoolean))))
     }
 
 
-    override fun getRemoteLongForKey(key: String, force: Boolean): Single<RemoteConfig<Long>> {
+    override fun getRemoteLongForKey(keyRemoteLong: String, force: Boolean): Single<RemoteConfig<Long>> {
         return fetch(force)
-            .andThen(Single.just(RemoteConfig(key, firebaseRemoteConfig.getLong(key))))
+            .andThen(Single.just(RemoteConfig(keyRemoteLong, firebaseRemoteConfig.getLong(keyRemoteLong))))
     }
 
-    override fun getRemoteDoubleForKey(key: String, force: Boolean): Single<RemoteConfig<Double>> {
+    override fun getRemoteDoubleForKey(keyRemoteDouble: String, force: Boolean): Single<RemoteConfig<Double>> {
         return fetch(force)
-            .andThen(Single.just(RemoteConfig(key, firebaseRemoteConfig.getDouble(key))))
+            .andThen(Single.just(RemoteConfig(keyRemoteDouble, firebaseRemoteConfig.getDouble(keyRemoteDouble))))
     }
 
     fun fetch(force: Boolean): Completable {
