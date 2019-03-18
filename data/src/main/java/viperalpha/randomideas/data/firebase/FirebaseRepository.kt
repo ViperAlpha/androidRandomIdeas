@@ -28,14 +28,15 @@ class FirebaseRepository @Inject constructor(
     }
 
     override fun getRemoteBooleanForKey(key: String, force: Boolean): Single<RemoteConfig<Boolean>> {
-        return firebaseRemoteConfig.fetch(FETCH_TIME)
+        return firebaseRemoteConfig.fetch(if (force) 0L else FETCH_TIME)
             .listen()
             .doOnComplete { firebaseRemoteConfig.activateFetched() }
             .andThen(Single.just(RemoteConfig(key, firebaseRemoteConfig.getBoolean(key))))
     }
 
+
     override fun getRemoteLongForKey(key: String, force: Boolean): Single<RemoteConfig<Long>> {
-        return firebaseRemoteConfig.fetch(FETCH_TIME)
+        return firebaseRemoteConfig.fetch(if (force) 0L else FETCH_TIME)
             .listen()
             .doOnComplete { firebaseRemoteConfig.activateFetched() }
             .andThen(Single.just(RemoteConfig(key, firebaseRemoteConfig.getLong(key))))
