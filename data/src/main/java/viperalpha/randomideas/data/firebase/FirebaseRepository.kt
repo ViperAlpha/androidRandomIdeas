@@ -22,27 +22,27 @@ class FirebaseRepository @Inject constructor(
     }
 
     override fun getRemoteStringForKey(keyRemoteString: String, force: Boolean): Single<RemoteConfig<String>> {
-        return fetch(force)
+        return fetchConfig(force)
             .andThen(Single.just(RemoteConfig(keyRemoteString, firebaseRemoteConfig.getString(keyRemoteString))))
     }
 
     override fun getRemoteBooleanForKey(keyRemoteBoolean: String, force: Boolean): Single<RemoteConfig<Boolean>> {
-        return fetch(force)
+        return fetchConfig(force)
             .andThen(Single.just(RemoteConfig(keyRemoteBoolean, firebaseRemoteConfig.getBoolean(keyRemoteBoolean))))
     }
 
 
     override fun getRemoteLongForKey(keyRemoteLong: String, force: Boolean): Single<RemoteConfig<Long>> {
-        return fetch(force)
+        return fetchConfig(force)
             .andThen(Single.just(RemoteConfig(keyRemoteLong, firebaseRemoteConfig.getLong(keyRemoteLong))))
     }
 
     override fun getRemoteDoubleForKey(keyRemoteDouble: String, force: Boolean): Single<RemoteConfig<Double>> {
-        return fetch(force)
+        return fetchConfig(force)
             .andThen(Single.just(RemoteConfig(keyRemoteDouble, firebaseRemoteConfig.getDouble(keyRemoteDouble))))
     }
 
-    fun fetch(force: Boolean): Completable {
+    fun fetchConfig(force: Boolean): Completable {
         return firebaseRemoteConfig.fetch(if (force) 0L else FETCH_TIME)
             .listen()
             .doOnComplete { firebaseRemoteConfig.activateFetched() }
