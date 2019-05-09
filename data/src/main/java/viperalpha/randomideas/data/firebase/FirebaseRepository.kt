@@ -18,7 +18,7 @@ class FirebaseRepository @Inject constructor(
 ) : FirebaseConfigRepositoryContract {
 
     companion object {
-        val FETCH_TIME = 4L * 60 * 60 // 4 horas
+        const val FETCH_TIME = 4L * 60 * 60 // 4 horas
     }
 
     override fun getRemoteStringForKey(keyForString: String, force: Boolean): Single<RemoteConfig<String>> {
@@ -46,7 +46,7 @@ class FirebaseRepository @Inject constructor(
         return firebaseRemoteConfig.fetch(if (force) 0L else FETCH_TIME)
             .listen()
             .doOnComplete { firebaseRemoteConfig.activateFetched() }
-            .onErrorComplete()
+//            .onErrorComplete()
     }
 
 

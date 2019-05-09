@@ -12,6 +12,6 @@ import io.reactivex.Completable
 fun Task<Void>.listen(): Completable {
     return Completable.create { e ->
         addOnFailureListener { exception: Exception -> e.onError(exception) }
-        addOnCompleteListener { task -> e.onComplete() }
+        addOnSuccessListener { e.onComplete() }
     }
 }
