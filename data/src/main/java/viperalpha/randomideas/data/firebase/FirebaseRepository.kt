@@ -42,7 +42,7 @@ class FirebaseRepository @Inject constructor(
             .andThen(Single.just(RemoteConfig(keyForDouble, firebaseRemoteConfig.getDouble(keyForDouble))))
     }
 
-    fun fetchConfig(force: Boolean): Completable {
+    private fun fetchConfig(force: Boolean): Completable {
         return firebaseRemoteConfig.fetch(if (force) 0L else FETCH_TIME)
             .listen()
             .doOnComplete { firebaseRemoteConfig.activateFetched() }

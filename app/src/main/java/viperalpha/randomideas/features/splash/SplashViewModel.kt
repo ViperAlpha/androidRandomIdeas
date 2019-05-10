@@ -1,5 +1,7 @@
 package viperalpha.randomideas.features.splash
 
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import viperalpha.domain.firebase.model.RemoteConfig
 import viperalpha.domain.firebase.usecase.ConfigUseCase
 import viperalpha.randomideas.core.ui.BaseViewModel
@@ -15,7 +17,7 @@ class SplashViewModel @Inject constructor(
     private val configUseCase: ConfigUseCase
 ) : BaseViewModel() {
 
-    init {
+    fun start() {
         loadWelcomeMessage()
         loadWelcomeImage()
     }
@@ -23,18 +25,22 @@ class SplashViewModel @Inject constructor(
     private fun loadWelcomeMessage() {
         disposables.add(
             configUseCase(RemoteConfig.RemoteKey.WelcomeMessage.key, true)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { responseWelcomeMessage -> uiModel.welcomeMessage.set(responseWelcomeMessage.data?.value) },
-                    { t -> uiModel.welcomeMessage.set("Welcome message. ;)") })
+                    { _ -> uiModel.welcomeMessage.set("Error Welcome message. ;(") })
         )
     }
 
     private fun loadWelcomeImage() {
         disposables.add(
             configUseCase(RemoteConfig.RemoteKey.WelcomeImage.key, true)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { responseWelcomeImage -> uiModel.welcomeImageUrl.set(responseWelcomeImage.data?.value) },
-                    { t -> uiModel.welcomeImageUrl.set("") })
+                    { _ -> uiModel.welcomeImageUrl.set("") })
         )
     }
 }

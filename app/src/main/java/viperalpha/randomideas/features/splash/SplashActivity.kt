@@ -10,9 +10,10 @@ import javax.inject.Inject
 
 class SplashActivity : BaseActivity(), Injectable {
 
-    lateinit var binding: ActivitySplashBinding
+    private lateinit var binding: ActivitySplashBinding
 
-    @Inject lateinit var viewModel: SplashViewModel
+    @Inject
+    lateinit var viewModel: SplashViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,13 +21,11 @@ class SplashActivity : BaseActivity(), Injectable {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
 
         init()
+    }
 
-//        Completable.complete()
-//            .delay(4, TimeUnit.SECONDS)
-//            .doOnComplete { finish() }
-//            .subscribe{ HomeActivity.startActivity(this) }
-//            .addTo(onStopDisposable)
-
+    override fun onStart() {
+        super.onStart()
+        viewModel.start()
     }
 
     private fun init() {
