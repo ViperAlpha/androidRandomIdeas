@@ -14,7 +14,7 @@ class BindingAdapters {
 
         @JvmStatic
         @BindingAdapter("app:uri")
-        fun setDraweeImageUri(view: SimpleDraweeView, uri: String) {
+        fun setDraweeImageUri(view: SimpleDraweeView, uri: String?) {
             view.setImageURI(uri)
         }
     }
